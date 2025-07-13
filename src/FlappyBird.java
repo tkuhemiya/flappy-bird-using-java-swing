@@ -56,7 +56,7 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener{
     }
 
     public boolean collision(Bird bird, Pipe pipe){
-        return bird.birdX < pipe.pipeX + pipe.pipeWidth &&
+        return bird.birdX -10 < pipe.pipeX + pipe.pipeWidth &&
                 bird.birdX + bird.width > pipe.pipeX &&
                 bird.birdY < pipe.pipeY + pipe.pipeHeight &&
                 bird.birdY + bird.height > pipe.pipeY;
@@ -86,10 +86,13 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener{
         }
 
         graphics.setColor(Color.white);
-        graphics.setFont(new Font("mono", Font.BOLD, 30));
+        graphics.setFont(new Font("Arial", Font.BOLD, 30));
         if(gameOver){
             graphics.drawString(String.valueOf((int)score), (int)(boardWidth/2 - 15), 30 );
             graphics.drawString("Game Over", (int)(boardWidth/4), (int)(boardHeight/2) );
+            graphics.setColor(Color.gray);
+            graphics.drawString("press space to retry", (int)(boardWidth/9), (int)(boardHeight/2 + 35) );
+            graphics.setColor(Color.white);
         }else{
             graphics.drawString(String.valueOf((int)score), (int)(boardWidth/2 - 15), 30);
         }
@@ -131,7 +134,7 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE){
-             bird.velocityY = -15;
+             bird.velocityY = -13;
              if(gameOver){
                  //reset
                  bird = new Bird(birdImg,boardWidth/8, boardHeight/2, 34, 24);
